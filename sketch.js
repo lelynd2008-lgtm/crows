@@ -170,7 +170,7 @@ let buttons = {};
 let animatronics = {};
 
 function setup() {
-  createCanvas(600, 400);
+  createCanvas(windowWidth, windowHeight);
   const offsetX = width - 225;
   const offsetY = height - 145;
   const horizontalSpacing = 65;
@@ -191,6 +191,10 @@ function setup() {
     deflate: { x: width / 2 + 50, y: height / 2 + 30, w: 80, h: 30 },
     mute: { x: width - 40, y: 5, w: 25, h: 25 }
   };
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
 
 function draw() {
