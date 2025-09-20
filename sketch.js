@@ -175,6 +175,10 @@ function setup() {
   const offsetY = height - 145;
   const horizontalSpacing = 65;
   const verticalSpacing = 42;
+    let cnv = createCanvas(800, 600); // fixed size
+    cnv.style('display', 'block');     // makes canvas behave like a block element
+    cnv.style('margin', 'auto');       // centers horizontally
+  }
 
   cams = [
     { id: 0, label: "Cam 1", x: offsetX + horizontalSpacing, y: offsetY },
