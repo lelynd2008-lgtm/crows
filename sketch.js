@@ -170,15 +170,11 @@ let buttons = {};
 let animatronics = {};
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(600, 400);
   const offsetX = width - 225;
   const offsetY = height - 145;
   const horizontalSpacing = 65;
   const verticalSpacing = 42;
-    let cnv = createCanvas(800, 600); // fixed size
-    cnv.style('display', 'block');     // makes canvas behave like a block element
-    cnv.style('margin', 'auto');       // centers horizontally
-  }
 
   cams = [
     { id: 0, label: "Cam 1", x: offsetX + horizontalSpacing, y: offsetY },
@@ -195,10 +191,6 @@ function setup() {
     deflate: { x: width / 2 + 50, y: height / 2 + 30, w: 80, h: 30 },
     mute: { x: width - 40, y: 5, w: 25, h: 25 }
   };
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
 }
 
 function draw() {
