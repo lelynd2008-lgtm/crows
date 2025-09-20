@@ -933,15 +933,20 @@ function drawCamView(idx) {
 }
 
 function drawDoorImages() {
-  // Only draw if the image exists
   if (game.leftDoorClosed && imgLeftDoor) {
-    image(imgLeftDoor, 50, 50, 100, 200); // fixed test numbers
+    let doorX = width * 0.01;  // very close to original x=1
+    let doorY = height * -0.03; // small negative offset, similar to -20
+    image(imgLeftDoor, doorX, doorY);
   }
 
   if (game.rightDoorBroken && imgRightDoorBroken) {
-    image(imgRightDoorBroken, 200, 50, 100, 200);
+    let doorX = width * 0.01;
+    let doorY = height * -0.03;
+    image(imgRightDoorBroken, doorX, doorY);
   } else if (game.rightDoorClosed && imgRightDoor) {
-    image(imgRightDoor, 200, 50, 100, 200);
+    let doorX = width * 0.01;
+    let doorY = height * -0.03;
+    image(imgRightDoor, doorX, doorY);
   }
 }
 
