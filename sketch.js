@@ -933,28 +933,15 @@ function drawCamView(idx) {
 }
 
 function drawDoorImages() {
-  // Left Door
+  // Only draw if the image exists
   if (game.leftDoorClosed && imgLeftDoor) {
-    let doorX = width * 0.05;  // 5% from the left
-    let doorY = height * 0.1;  // 10% from the top
-    let doorW = width * 0.1;   // 10% of canvas width
-    let doorH = height * 0.3;  // 30% of canvas height
-    image(imgLeftDoor, doorX, doorY, doorW, doorH);
+    image(imgLeftDoor, 50, 50, 100, 200); // fixed test numbers
   }
 
-  // Right Door
   if (game.rightDoorBroken && imgRightDoorBroken) {
-    let doorX = width * 0.85;  // 85% from left
-    let doorY = height * 0.1;  // 10% from top
-    let doorW = width * 0.1;   // 10% of canvas width
-    let doorH = height * 0.3;  // 30% of canvas height
-    image(imgRightDoorBroken, doorX, doorY, doorW, doorH);
+    image(imgRightDoorBroken, 200, 50, 100, 200);
   } else if (game.rightDoorClosed && imgRightDoor) {
-    let doorX = width * 0.85;
-    let doorY = height * 0.1;
-    let doorW = width * 0.1;
-    let doorH = height * 0.3;
-    image(imgRightDoor, doorX, doorY, doorW, doorH);
+    image(imgRightDoor, 200, 50, 100, 200);
   }
 }
 
