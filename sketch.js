@@ -932,46 +932,12 @@ function drawCamView(idx) {
   }
 }
 
-// --- Reusable drawing function ---
 function drawDoorImages() {
-  // Ensure draw() has drawn background already
-  for (let d of doors) {
-    // check game state flag
-    if (!game || !game[d.key]) continue;
-
-    const imgObj = d.img();
-    if (!imgObj) continue; // image not loaded / missing
-
-    // compute position
-    const x = width * (d.relX ?? 0);      // default 0 if not set
-    const y = height * (d.relY ?? 0);     // relY can be negative
-
-    // compute size
-    let w, h;
-    if (d.relW != null) {
-      // width based on canvas fraction
-      w = width * d.relW;
-      if (d.relH != null) {
-        h = height * d.relH;
-      } else {
-        // preserve aspect ratio
-        h = w * (imgObj.height / imgObj.width);
-      }
-    } else if (d.relH != null) {
-      // height based on canvas fraction
-      h = height * d.relH;
-      w = h * (imgObj.width / imgObj.height);
-    } else {
-      // use natural image size, optionally scaled
-      w = imgObj.width * (d.scale ?? 1);
-      h = imgObj.height * (d.scale ?? 1);
-    }
-
-    // optional: floor sizes to avoid weird floats (not required)
-    // w = Math.round(w); h = Math.round(h);
-
-    // draw
-    image(imgObj, x, y, w, h);
+  if (game.leftDoorClosed && imgLeftDoor) image(imgLeftDoor, 1, -20);
+  if (game.rightDoorBroken && imgRightDoorBroken) {
+    image(imgRightDoorBroken, 1, -20);
+  } else if (game.rightDoorClosed && imgRightDoor) {
+    image(imgRightDoor, 1, -20);
   }
 }
 
