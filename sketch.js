@@ -932,21 +932,46 @@ function drawCamView(idx) {
   }
 }
 
+// --- Reusable drawing function ---
 function drawDoorImages() {
-  if (game.leftDoorClosed && imgLeftDoor) {
-    let doorX = width * 0.01;  // very close to original x=1
-    let doorY = height * -0.03; // small negative offset, similar to -20
-    image(imgLeftDoor, doorX, doorY);
-  }
+  // Ensure draw() has drawn background already
+  for (let d of doors) {
+    // check game state flag
+    if (!game || !game[d.key]) continue;
 
-  if (game.rightDoorBroken && imgRightDoorBroken) {
-    let doorX = width * 0.01;
-    let doorY = height * -0.03;
-    image(imgRightDoorBroken, doorX, doorY);
-  } else if (game.rightDoorClosed && imgRightDoor) {
-    let doorX = width * 0.01;
-    let doorY = height * -0.03;
-    image(imgRightDoor, doorX, doorY);
+    const imgObj = d.img();
+    if (!imgObj) continue; // image not loaded / missing
+
+    // compute position
+    const x = width * (d.relX ?? 0);      // default 0 if not set
+    const y = height * (d.relY ?? 0);     // relY can be negative
+
+    // compute size
+    let w, h;
+    if (d.relW != null) {
+      // width based on canvas fraction
+      w = width * d.relW;
+      if (d.relH != null) {
+        h = height * d.relH;
+      } else {
+        // preserve aspect ratio
+        h = w * (imgObj.height / imgObj.width);
+      }
+    } else if (d.relH != null) {
+      // height based on canvas fraction
+      h = height * d.relH;
+      w = h * (imgObj.width / imgObj.height);
+    } else {
+      // use natural image size, optionally scaled
+      w = imgObj.width * (d.scale ?? 1);
+      h = imgObj.height * (d.scale ?? 1);
+    }
+
+    // optional: floor sizes to avoid weird floats (not required)
+    // w = Math.round(w); h = Math.round(h);
+
+    // draw
+    image(imgObj, x, y, w, h);
   }
 }
 
